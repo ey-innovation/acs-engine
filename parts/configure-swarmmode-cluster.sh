@@ -16,7 +16,7 @@ echo "starting Swarm Mode cluster configuration"
 date
 ps ax
 
-DOCKER_CE_VERSION="17.05.*"
+DOCKER_CE_VERSION="17.06.*"
 DOCKER_COMPOSE_VERSION="1.14.0"
 #############
 # Parameters
