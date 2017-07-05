@@ -16,7 +16,7 @@ echo "starting Swarm Mode cluster configuration"
 date
 ps ax
 
-DOCKER_CE_VERSION="17.06.*"
+DOCKER_CE_VERSION="17.03.*"
 DOCKER_COMPOSE_VERSION="1.14.0"
 #############
 # Parameters
@@ -156,9 +156,12 @@ installDocker()
   for i in {1..10}; do
     apt-get install -y apt-transport-https ca-certificates curl software-properties-common
     curl --max-time 60 -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
-    add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
     apt-get update
-    apt-get install -y docker-ce=${DOCKER_CE_VERSION}
+
+    apt-get install libltdl7
+    curl -O https://download.docker.com/linux/ubuntu/dists/xenial/pool/edge/amd64/docker-ce_17.05.0~ce-0~ubuntu-xenial_amd64.deb
+    sudo dpkg -i docker-ce_17.05.0~ce-0~ubuntu-xenial_amd64.deb
+
     if [ $? -eq 0 ]
     then
       systemctl restart docker
