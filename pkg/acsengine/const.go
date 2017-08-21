@@ -85,7 +85,7 @@ const (
 	SwarmVersion              = "swarm:1.1.0"
 	SwarmDockerComposeVersion = "1.6.2"
 	// DockerCE orchestrator and docker compose versions
-	DockerCEVersion              = "17.03.*"
+	DockerCEVersion              = "17.05.*"
 	DockerCEDockerComposeVersion = "1.14.0"
 )
 
