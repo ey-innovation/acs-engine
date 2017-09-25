@@ -28,8 +28,6 @@ MASTERFIRSTADDR=${3}
 AZUREUSER=${4}
 POSTINSTALLSCRIPTURI=${5}
 BASESUBNET=${6}
-OMSWORKSPACEID=${7}
-OMSWORKSPACEKEY=${8}
 
 VMNAME=`hostname`
 VMNUMBER=`echo $VMNAME | sed 's/.*[^0-9]\([0-9]\+\)*$/\1/'`
@@ -308,17 +306,6 @@ echo "processes at end of script"
 ps ax
 date
 echo "completed Swarm Mode cluster configuration"
-
-if isagent ; then
-    if [ -z ${OMSWORKSPACEID} ] || [ -z ${OMSWORKSPACEKEY} ]
-    then
-        echo "OMS workspace id/key not provided. Not installing OMS agent."
-    else
-        echo "Installing OMS agent..."
-        sudo docker run --privileged -d -v /var/run/docker.sock:/var/run/docker.sock -v /var/log:/var/log -e WSID="${OMSWORKSPACEID}" \
-             -e KEY="${OMSWORKSPACEKEY}" -p 127.0.0.1:25225:25225 -p 127.0.0.1:25224:25224/udp --name="omsagent" -h=$(hostname) --restart=always microsoft/oms
-    fi
-fi
 
 echo "restart system to install any remaining software"
 if isagent ; then
